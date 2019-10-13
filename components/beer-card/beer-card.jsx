@@ -1,28 +1,39 @@
 import React, { FunctionComponent } from 'react';
 import styled from 'styled-components';
+import { Typography } from '../typography';
 
 const BeerPlaceholder = 'https://beta.daft.ie/static/images/fallbacks/no-image-size740x480.jpg';
 
-const PageContent = styled.div`
+const Container = styled.div`
   width: 100%;
   display: flex;
   justify-content: space-between;
   background: #fff;
   padding: 20px;
+  flex-direction: column;
+
+  @media (min-width: 1024px) {
+    flex-direction: row;
+  }
 `;
 
-const Title = styled.h1`
-  color: grey;
+const BreweryText = styled(Typography)`
+  text-transform: uppercase;
+  font-size: 12px;
 `;
 
-const Text = styled.p`
-  color: grey;
+const ImageContainer = styled.div`
+  width: 100%;
+  flex-shrink: 0;
+
+  @media (min-width: 1024px) {
+    padding-right: 50px;
+    width: 50%;
+  }
 `;
 
 const Image = styled.img`
-  color: grey;
-  padding-right: 50px;
-  width: 50%;
+  width: 100%;
 `;
 
 const BeerDetails = styled.div`
@@ -33,17 +44,19 @@ const BeerDetails = styled.div`
 
 const BeerCard = ({ breweries, description, image, name }) => {
   const renderBreweries = () =>
-    breweries && breweries.map(brewery => <Text key={`brewery-${brewery.id}`}>{brewery.name}</Text>);
+    breweries && breweries.map(brewery => <BreweryText key={`brewery-${brewery.id}`}>{brewery.name}</BreweryText>);
 
   return (
-    <PageContent>
-      <Image src={image || BeerPlaceholder} />
+    <Container>
+      <ImageContainer>
+        <Image src={image || BeerPlaceholder} />
+      </ImageContainer>
       <BeerDetails>
-        <Title>{name}</Title>
+        <Typography as="h2">{name}</Typography>
         {renderBreweries()}
-        <Text>{description}</Text>
+        <Typography>{description}</Typography>
       </BeerDetails>
-    </PageContent>
+    </Container>
   );
 };
 
