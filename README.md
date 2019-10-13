@@ -9,7 +9,11 @@ Simple App to get random Beer
 - Styled Components
 - Typescript
 
-### Installing global dependencies
+### How to Run
+
+`git checkout dev`
+
+### Installing dependencies
 
 - `yarn`
 
