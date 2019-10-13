@@ -1,4 +1,5 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect } from 'react';
+import fetch from 'isomorphic-unfetch';
 
 export const useFetch = (url: string, options?: object) => {
   const [response, setResponse] = useState(null);
