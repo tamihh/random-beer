@@ -1,1 +1,1 @@
-# random-beer
+# Random Beer App
