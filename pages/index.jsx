@@ -39,10 +39,12 @@ const StyledButton = styled(Button)`
 
 const Home = () => {
   const { randomBeerDetails, error } = useRandomBeerData();
+  const [data, setData] = useState({});
 
   const fetchRequest = useCallback(() => {
-    useRandomBeerData();
-  }, []);
+    const { randomBeerDetails } = useRandomBeerData();
+    setData(randomBeerDetails);
+  }, [data]);
 
   if (randomBeerDetails) {
     const { id, name, style, breweries } = randomBeerDetails;
