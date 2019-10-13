@@ -1,13 +1,13 @@
 import React, { FunctionComponent } from "react";
-import Head from "../components/head";
+import styled from "styled-components";
+
+const Title = styled.h1`
+  color: red;
+`;
 
 const Home: FunctionComponent<{}> = () => (
   <div>
-    <Head title="Home" />
-
-    <div>
-      <h1 className="title">Random Beer</h1>
-    </div>
+    <Title className="title">Random Beer</Title>
   </div>
 );
 
