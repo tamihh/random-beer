@@ -1,3 +1,4 @@
+import React, { useEffect, useState, useRef, useCallback } from 'react';
 import styled from 'styled-components';
 import Link from 'next/link';
 
@@ -19,7 +20,8 @@ const BackButton = styled.a`
 `;
 
 const Beer = ({ id }) => {
-  const { isLoading, beerDetails, error } = useBeerData(id);
+  const [shouldFetch, setShouldFetch] = useState(true);
+  const { isLoading, beerDetails, error } = useBeerData(id, {}, shouldFetch, setShouldFetch);
 
   if (error) {
     return <div>error</div>;

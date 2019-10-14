@@ -9,7 +9,7 @@ Simple App to get random Beer
 - Styled Components
 - Typescript
 
-### How to Run
+### Go to dev branch
 
 `git checkout dev`
 

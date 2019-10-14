@@ -1,13 +1,14 @@
-import React, { useEffect, useState, useRef, useCallback } from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import Link from 'next/link';
 
 import { Typography } from '../components/typography';
 import { PageContainer } from '../components/page-container';
 import { Button } from '../components/button';
-import { useRandomBeerData, useBeerData } from '../utils/use-beer-data';
+import { useRandomBeerData, useBeerData, fetchData } from '../utils/use-beer-data';
 import BeerCard from '../components/beer-card/beer-card';
 import { truncate } from '../utils/truncate';
+import { useFetch, useFetch2 } from '../utils/use-fetch';
 
 const PageHead = styled.div`
   width: 100%;
@@ -38,13 +39,8 @@ const StyledButton = styled(Button)`
 `;
 
 const Home = () => {
-  const { randomBeerDetails, error } = useRandomBeerData();
-  const [data, setData] = useState({});
-
-  const fetchRequest = useCallback(() => {
-    const { randomBeerDetails } = useRandomBeerData();
-    setData(randomBeerDetails);
-  }, [data]);
+  const [shouldFetch, setShouldFetch] = useState(true);
+  const { randomBeerDetails, error } = useRandomBeerData({}, shouldFetch, setShouldFetch);
 
   if (randomBeerDetails) {
     const { id, name, style, breweries } = randomBeerDetails;
@@ -56,7 +52,13 @@ const Home = () => {
           <Typography as="h1" fs={32}>
             The Random Beer App
           </Typography>
-          <StyledButton onClick={() => fetchRequest()}>Show Another Beer</StyledButton>
+          <StyledButton
+            onClick={() => {
+              setShouldFetch(true);
+            }}
+          >
+            Show Another Beer
+          </StyledButton>
         </PageHead>
         <Link href="/[id]" as={`/${id}`}>
           <a>
