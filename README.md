@@ -2,16 +2,13 @@
 
 Simple App to get random Beer
 
-## Includes
+## Stack
 
 - React
 - Next.js
 - Styled Components
 - Typescript
 
-### Go to dev branch
-
-`git checkout dev`
 
 ### Installing dependencies
 
