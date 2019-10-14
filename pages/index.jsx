@@ -5,10 +5,9 @@ import Link from 'next/link';
 import { Typography } from '../components/typography';
 import { PageContainer } from '../components/page-container';
 import { Button } from '../components/button';
-import { useRandomBeerData, useBeerData, fetchData } from '../utils/use-beer-data';
+import { useRandomBeerData } from '../utils/use-beer-data';
 import BeerCard from '../components/beer-card/beer-card';
 import { truncate } from '../utils/truncate';
-import { useFetch, useFetch2 } from '../utils/use-fetch';
 
 const PageHead = styled.div`
   width: 100%;
@@ -38,6 +37,14 @@ const StyledButton = styled(Button)`
   }
 `;
 
+const CenterContent = styled.div`
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`;
+
 const Home = () => {
   const [shouldFetch, setShouldFetch] = useState(true);
   const { randomBeerDetails, error } = useRandomBeerData({}, shouldFetch, setShouldFetch);
@@ -62,16 +69,16 @@ const Home = () => {
         </PageHead>
         <Link href="/[id]" as={`/${id}`}>
           <a>
-            <BeerCard image="" name={name} description={description} breweries={breweries} />
+            <BeerCard image="" name={name} id={id} description={description} breweries={breweries} showSeeMoreButton />
           </a>
         </Link>
       </PageContainer>
     );
   }
 
-  if (error) return <div>oops.. something went wrong :(</div>;
+  if (error) return <CenterContent>oops.. something went wrong :(</CenterContent>;
 
-  return <div>loading...</div>;
+  return <CenterContent>loading...</CenterContent>;
 };
 
 export default Home;
