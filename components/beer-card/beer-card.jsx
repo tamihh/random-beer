@@ -55,7 +55,7 @@ const SeeMoreButton = styled.a`
   font-size: ${({ theme }) => theme.fontSize.xxs}px;
 `;
 
-const BeerCard = ({ breweries, description, image, id, name, showSeeMoreButton }) => {
+export const BeerCard = ({ breweries, description, image, id, name, showSeeMoreButton }) => {
   const renderBreweries = () =>
     breweries && breweries.map(brewery => <BreweryText key={`brewery-${brewery.id}`}>{brewery.name}</BreweryText>);
 
