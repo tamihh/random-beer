@@ -1,5 +1,7 @@
 import React, { FunctionComponent } from 'react';
 import styled from 'styled-components';
+import Link from 'next/link';
+
 import { Typography } from '../typography';
 
 const BeerPlaceholder = 'https://beta.daft.ie/static/images/fallbacks/no-image-size740x480.jpg';
@@ -11,6 +13,8 @@ const Container = styled.div`
   background: #fff;
   padding: 20px;
   flex-direction: column;
+  box-shadow: 0px 0px 3px 0px rgba(0, 0, 0, 0.1);
+  position: relative;
 
   @media (min-width: 1024px) {
     flex-direction: row;
@@ -42,7 +46,16 @@ const BeerDetails = styled.div`
   flex-grow: 1;
 `;
 
-const BeerCard = ({ breweries, description, image, name }) => {
+const SeeMoreButton = styled.a`
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+  color: ${({ theme }) => theme.colors.primary};
+  text-transform: uppercase;
+  font-size: ${({ theme }) => theme.fontSize.xxs}px;
+`;
+
+const BeerCard = ({ breweries, description, image, id, name, showSeeMoreButton }) => {
   const renderBreweries = () =>
     breweries && breweries.map(brewery => <BreweryText key={`brewery-${brewery.id}`}>{brewery.name}</BreweryText>);
 
@@ -55,6 +68,11 @@ const BeerCard = ({ breweries, description, image, name }) => {
         <Typography as="h2">{name}</Typography>
         {renderBreweries()}
         <Typography>{description}</Typography>
+        {showSeeMoreButton && (
+          <Link href="/[id]" as={`/${id}`}>
+            <SeeMoreButton>See more...</SeeMoreButton>
+          </Link>
+        )}
       </BeerDetails>
     </Container>
   );
